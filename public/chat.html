@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>chat</title>
+  </head>
+  <body>
+    <header>
+      <h1>Chat</h1>
+      <div>
+        <h3 id="room"></h3>
+        <p id="chatname"></p>
+      </div>
+    </header>
+    <div id="chatroom"></div>
+
+    <form id="input">
+      <input type="text" id="msg" />
+      <button>Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      let socket = io();
+      let chatname = document.querySelector("#chatname");
+      let room = document.querySelector("#room");
+      let form = document.querySelector("#input");
+      let msg = document.querySelector("#msg");
+      let chatroom = document.querySelector("#chatroom");
+
+      if (window.sessionStorage.room) {
+        room.innerText = window.sessionStorage.room;
+      }
+      chatname.innerText = window.sessionStorage.name;
+
+      socket.on("receive msg", function (msg) {
+        let div = document.createElement("div");
+        div.classList = "recvmsg";
+        let h6 = document.createElement("h6");
+        h6.style.fontStyle = "italic";
+        let p = document.createElement("p");
+        p.innerText = msg.msg;
+        h6.innerText = msg.name;
+        div.appendChild(h6);
+        div.appendChild(p);
+        chatroom.appendChild(div);
+      });
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (msg.value) {
+          let div = document.createElement("div");
+          div.innerText = msg.value;
+          div.classList = "sendmsg";
+          chatroom.appendChild(div);
+          socket.emit("send message", {
+            name: window.sessionStorage.name,
+            msg: msg.value,
+          });
+          msg.value = "";
+        }
+      });
+    </script>
+  </body>
+</html>

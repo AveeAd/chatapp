@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ccc;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  background: linear-gradient(to right, #002, #008);
+  color: #fff;
+}
+
+#root {
+  width: 60%;
+  margin: 0 auto;
+}
+
+#root h4 {
+  margin: 0.5rem 0;
+  color: #008;
+}
+
+#root input {
+  padding: 0.5rem;
+  border: 2px solid #008;
+  width: 100%;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  background: none;
+}
+
+#root input:focus {
+  outline: none;
+  border: 3px solid #008;
+}
+#root button {
+  padding: 0.5rem;
+  border: 2px solid #000;
+  display: block;
+  margin: 0 auto;
+  width: 30%;
+  border-radius: 0.5rem;
+  background: linear-gradient(to right, #002, #008);
+  color: #fff;
+}
+
+#input {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+  background-color: #fff;
+}
+
+#input input {
+  width: 80%;
+  padding: 0.5rem;
+  background-color: #ccc;
+  border: 1px solid #008;
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+#input button {
+  width: 18%;
+  padding: 0.5rem;
+  background: linear-gradient(to right, #002, #008);
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+
+#chatroom {
+  height: 100%;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#chatroom div {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.sendmsg {
+  text-align: right;
+  background-color: #008;
+  float: right;
+}
+
+.recvmsg {
+  text-align: left;
+  background-color: #002;
+  float: left;
+}
