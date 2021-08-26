@@ -7,6 +7,8 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 
 const port = process.env.PORT || 5000;
+var j;
+var users = [];
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -23,11 +25,17 @@ io.on("connect", (socket) => {
   socket.on("send message", (msg) => {
     socket.to(msg.room).emit("receive msg", msg);
   });
-  socket.on("join room", (room) => {
+  socket.on("join room", (room, name) => {
     socket.join(room);
+    io.emit("room joined", { joined: true, name });
+    users.push(socket.id);
+    io.emit("active counter", users.length);
   });
+
   socket.on("disconnect", () => {
     console.log("user disconnected");
+    users = users.filter((user) => user !== socket.id);
+    io.emit("user disconnected", true);
   });
 });
 

@@ -9,7 +9,10 @@
   </head>
   <body>
     <header>
-      <h1>Chat</h1>
+      <div>
+        <h2>Chat</h2>
+        <small id="counter"></small>
+      </div>
       <div>
         <h3 id="room"></h3>
         <p id="chatname"></p>
@@ -22,56 +25,6 @@
       <button>Send</button>
     </form>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      function Redirect() {
-        window.location = "/";
-        socket.emit("disconnect");
-      }
-      if (!window.sessionStorage.name || !window.sessionStorage.room) {
-        Redirect();
-      }
-      let socket = io();
-      let chatname = document.querySelector("#chatname");
-      let room = document.querySelector("#room");
-      let form = document.querySelector("#input");
-      let msg = document.querySelector("#msg");
-      let chatroom = document.querySelector("#chatroom");
-
-      room.innerText = window.sessionStorage.room;
-      chatname.innerText = window.sessionStorage.name;
-      socket.emit("join room", window.sessionStorage.room);
-
-      socket.on("receive msg", function (msg) {
-        let div = document.createElement("div");
-        div.classList = "recvmsg";
-        let h6 = document.createElement("h6");
-        h6.style.fontStyle = "italic";
-        let p = document.createElement("p");
-        p.innerText = msg.msg;
-        h6.innerText = msg.name;
-        div.appendChild(h6);
-        div.appendChild(p);
-        chatroom.appendChild(div);
-        chatroom.scrollTop = chatroom.scrollHeight;
-      });
-
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        if (msg.value) {
-          let div = document.createElement("div");
-          div.innerText = msg.value;
-          div.classList = "sendmsg";
-          chatroom.appendChild(div);
-          chatroom.scrollTop = chatroom.scrollHeight;
-
-          socket.emit("send message", {
-            name: window.sessionStorage.name,
-            msg: msg.value,
-            room: window.sessionStorage.room,
-          });
-          msg.value = "";
-        }
-      });
-    </script>
+    <script src="chat.js"></script>
   </body>
 </html>
