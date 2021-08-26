@@ -62,6 +62,8 @@
           div.innerText = msg.value;
           div.classList = "sendmsg";
           chatroom.appendChild(div);
+          chatroom.scrollTop = chatroom.scrollHeight;
+
           socket.emit("send message", {
             name: window.sessionStorage.name,
             msg: msg.value,
