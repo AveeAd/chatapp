@@ -17,11 +17,7 @@ app.get("/chat", (req, res) => {
 io.on("connect", (socket) => {
   console.log("user connected");
   socket.on("send message", (msg) => {
-    if (msg.room) {
-      socket.to(msg.room).emit("receive msg", msg);
-    } else {
-      socket.broadcast.emit("receive msg", msg);
-    }
+    socket.to(msg.room).emit("receive msg", msg);
   });
   socket.on("join room", (room) => {
     socket.join(room);

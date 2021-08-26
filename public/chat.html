@@ -30,11 +30,9 @@
       let msg = document.querySelector("#msg");
       let chatroom = document.querySelector("#chatroom");
 
-      if (window.sessionStorage.room) {
-        room.innerText = window.sessionStorage.room;
-        socket.emit("join room", window.sessionStorage.room);
-      }
+      room.innerText = window.sessionStorage.room;
       chatname.innerText = window.sessionStorage.name;
+      socket.emit("join room", window.sessionStorage.room);
 
       socket.on("receive msg", function (msg) {
         let div = document.createElement("div");
@@ -57,7 +55,6 @@
           div.innerText = msg.value;
           div.classList = "sendmsg";
           chatroom.appendChild(div);
-          // chatroom.scrollTop = div.scrollHeight;
           socket.emit("send message", {
             name: window.sessionStorage.name,
             msg: msg.value,
