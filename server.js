@@ -36,6 +36,7 @@ io.on("connect", (socket) => {
     console.log("user disconnected");
     users = users.filter((user) => user !== socket.id);
     io.emit("user disconnected", true);
+    io.emit("active counter", users.length);
   });
 });
 
