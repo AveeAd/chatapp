@@ -32,6 +32,7 @@
 
       if (window.sessionStorage.room) {
         room.innerText = window.sessionStorage.room;
+        socket.emit("join room", window.sessionStorage.room);
       }
       chatname.innerText = window.sessionStorage.name;
 
@@ -46,6 +47,7 @@
         div.appendChild(h6);
         div.appendChild(p);
         chatroom.appendChild(div);
+        chatroom.scrollTop = chatroom.scrollHeight;
       });
 
       form.addEventListener("submit", function (e) {
@@ -55,9 +57,11 @@
           div.innerText = msg.value;
           div.classList = "sendmsg";
           chatroom.appendChild(div);
+          // chatroom.scrollTop = div.scrollHeight;
           socket.emit("send message", {
             name: window.sessionStorage.name,
             msg: msg.value,
+            room: window.sessionStorage.room,
           });
           msg.value = "";
         }

@@ -15,7 +15,6 @@ const onEnter = (e) => {
     errormsg = document.createElement("p");
     errormsg.innerText = "Please enter your name";
     errormsg.style.color = "red";
-
     root.appendChild(errormsg);
   }
 };
