@@ -23,6 +23,13 @@
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      function Redirect() {
+        window.location = "/";
+        socket.emit("disconnect");
+      }
+      if (!window.sessionStorage.name || !window.sessionStorage.room) {
+        Redirect();
+      }
       let socket = io();
       let chatname = document.querySelector("#chatname");
       let room = document.querySelector("#room");
